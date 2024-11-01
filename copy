@@ -1,0 +1,113 @@
+class Person:
+    name = ""
+    age = 0
+    address = ""
+
+    def display_person_info(self):
+        print(f'name: {self.name}'
+              f'age: {self.age}'
+              f'address: {self.address}')
+
+
+class Student(Person):
+    student_id = ""
+    grades = {"": ""}
+    courses = []
+
+    def add_grade(self, subject, grade):
+        self.grades = {subject: grade}
+
+    def enroll_course(self, course):
+        self.courses.append(course)
+
+    def display_student_info(self):
+        print(f'''
+        Student Information:
+        Name: {self.name}
+        ID: {self.student_id}
+        Age: {self.age}
+        Address: {self.address}
+        Enrolled courses: {self.courses}
+        Grades: {self.grades}''')
+
+
+class Course:
+    course_name = ""
+    course_code = ""
+    instructor = ""
+    students = []
+
+    def add_student(self, student):
+            self.students.append(student)
+
+    def display_course_info(self):
+        print(f'''
+              Course Information:
+              Course Name: {self.course_name}
+              Code: {self.course_code}
+              Instructor: {self.instructor}
+              Enrolled Students: {StudentOBJ.name}''')
+
+
+print(f'''
+      ==== Student Management System ====
+      1. Add New Student
+      2. Add New Course
+      3. Enroll Student in Course
+      4. Add Grade for Student
+      5. Display Student Details
+      6. Display Course Details
+      0. Exit
+''')
+
+while True:
+    PersonOBJ = Person()
+    StudentOBJ = Student()
+    CourseOBJ = Course()
+    option = int(input("Enter your option number: "))
+
+    if option == 0:
+        print(f'Exiting Student Management System. Goodbye!')
+        break
+
+    elif option == 1:
+        Person.name = input("Enter Student Name: ")
+        Person.age = input("Enter age: ")
+        Person.address = input("Enter address: ")
+        Student.student_id = input("Enter student id: ")
+        print(f'Student {Student.name} (ID: {Student.student_id}) added successfully')
+
+    elif option == 2:
+        Course.course_name = input("Enter Course Name: ")
+        Course.course_code = input("Enter Course Code: ")
+        Course.instructor = input("Enter Instructor Name: ")
+        print(f'Course {Course.course_name} (Code: {Course.course_code}) created with instructor {Course.instructor}')
+
+    elif option == 3:
+        StudentOBJ.student_id = input("Enter Student ID: ")
+        CourseOBJ.course_code = input("Enter Course Code: ")
+
+        StudentOBJ.enroll_course(CourseOBJ.course_name)
+        CourseOBJ.add_student(StudentOBJ.name)
+
+        print(f'Student {StudentOBJ.name} (ID: {StudentOBJ.student_id}) enrolled in {CourseOBJ.course_name} (Code: {CourseOBJ.course_code})')
+
+    elif option == 4:
+        StudentOBJ.student_id = input("Enter Student ID: ")
+        CourseOBJ.course_code = input("Enter Course Code: ")
+
+        grade_input = input("Enter Grade: ")
+        StudentOBJ.add_grade(CourseOBJ.course_name, grade_input)
+
+        print(f'Grade {grade_input} added for {StudentOBJ.name} in {CourseOBJ.course_name}')
+
+    elif option == 5:
+        StudentOBJ.student_id = input("Enter Student ID: ")
+        StudentOBJ.display_student_info()
+
+    elif option == 6:
+        CourseOBJ.course_code = input("Enter Course Code: ")
+        CourseOBJ.display_course_info()
+
+    else:
+        print(f'Invalid option')
